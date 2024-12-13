@@ -8,10 +8,8 @@ import { FaCheck } from "react-icons/fa6";
 import { MdOutlineErrorOutline } from "react-icons/md";
 import { FiShoppingCart } from "react-icons/fi";
 
-interface CurrentPage {
-  current: string,
-}
-const Header = (current:CurrentPage) => {
+
+const Header = () => {
 
   let [selectValue,setSelectValue] = useState("")
 

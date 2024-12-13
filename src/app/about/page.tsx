@@ -12,6 +12,7 @@ import Card3 from "../../../public/Photo (1).png"
 export default function About() {
     return (
         <>
+        <title>About</title>
             <div className="w-[1440px] mx-auto max-w-[90%] my-10 flex flex-col gap-20">
                 <div className="flex flex-col-reverse md:flex-row justify-between gap-10">
                     <div className="w-full flex flex-col justify-between gap-10 p-10 md:p-5 lg:p-10 text-white bg-[#007580] md:w-1/2">

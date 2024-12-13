@@ -11,6 +11,8 @@ import FeatureCard from "../components/FeatureCard";
 import { FiShoppingCart } from "react-icons/fi";
 export default function ProductPage() {
     return (
+        <>
+        <title>Product Page</title>
         <div className="w-[1440px] mx-auto max-w-[90%] my-20">
             <div className="flex flex-col md:flex-row md:justify-between gap-10 xl:gap-0">
                 <div className="w-full md:w-1/2">
@@ -43,5 +45,6 @@ export default function ProductPage() {
             </div>
             </div>
         </div>
+        </>
     )
 }

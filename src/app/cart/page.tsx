@@ -6,6 +6,8 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import Button from "../components/Button";
 export default function Cart() {
     return (
+        <>
+        <title>Cart</title>
         <div className="w-[1440px] mx-auto max-w-[90%] my-20">
             <div className="flex flex-col justify-between lg:flex-row gap-20">
                 <div className="lg:w-3/4 w-full">
@@ -94,5 +96,6 @@ export default function Cart() {
                 </div>
             </div>
         </div>
+        </>
     )
 }

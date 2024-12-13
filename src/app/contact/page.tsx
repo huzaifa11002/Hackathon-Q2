@@ -8,6 +8,8 @@ import Support from "../../../public/customer-support.png"
 import Button from "../components/Button";
 export default function Contact() {
     return (
+        <>
+        <title>Need Help</title>
         <div className="w-full">
 
         <div className="w-[1440px] mx-auto max-w-[90%] mt-20">
@@ -110,5 +112,6 @@ export default function Contact() {
         </div>
         </div>
         </div>
+        </>
     )
 }

@@ -1,6 +1,8 @@
 import { FaPlus } from "react-icons/fa6";
 export default function Faq(){
     return(
+        <>
+        <title>FAQS</title>
         <div className="w-[1440px] mx-auto max-w-[90%] my-20">
             <div className="flex justify-center items-center flex-col gap-5">
                 <h2 className="text-xl lg:text-3xl text-main font-bold capitalize">Questions Look here</h2>
@@ -51,5 +53,6 @@ export default function Faq(){
                 </div>
             </div>
         </div>
+        </>
     )
 }

@@ -8,6 +8,7 @@ import Image4 from "../../../public/Image (3).png"
 export default function Products(){
     return(
         <>
+        <title>Products</title>
     <div className="w-[1440px] mx-auto max-w-[90%] my-20">
     <div className="flex flex-col gap-10">
     <h2 className="text-lg lg:text-3xl font-semibold text-main">All Products</h2>  
