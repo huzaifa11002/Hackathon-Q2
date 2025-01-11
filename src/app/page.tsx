@@ -6,15 +6,15 @@ import CategoryProducts from "./components/CategoryProducts";
 import Arrival from "./components/Arrival";
 import Products from "./components/Products";
 
-export default function Home() {
+export default async function Home() {
   return(
     <>
     <HeroSection/>
     <BrandsLogo/>
-    <FeatureProducts/>
-    <CategoryProducts/>
+    {await FeatureProducts()}
+    {await CategoryProducts()}
     <Arrival/>
-    <Products/>
+    {await Products()}
     </>
 
   )
