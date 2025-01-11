@@ -9,6 +9,7 @@ import Product5 from "../../../public/Image (6).png"
 import Button from "../components/Button"
 import FeatureCard from "../components/FeatureCard";
 import { FiShoppingCart } from "react-icons/fi";
+import Count from "../components/Count";
 export default function ProductPage() {
     return (
         <>
@@ -27,6 +28,7 @@ export default function ProductPage() {
                         <p className="text-xs lg:text-base">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit magnam quo reprehenderit.
                             Accusantium amet enim, quaerat vitae voluptatem reiciendis deleniti mollitia quisquam, voluptate sed tempora qui
                             excepturi unde nemo officia dolorem aliquid, repellendus nobis veniam soluta magnam beatae doloremque sequi!</p>
+                            <Count/>
                         <Button value="Add to Cart" iconLeft={<FiShoppingCart className="w-[16px] h-[16px]"/>}/>
                     </div>
                 </div>
