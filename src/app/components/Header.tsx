@@ -132,7 +132,7 @@ const Header = () => {
                 <Link href="/cart">
                   <div className="flex items-center bg-white rounded-lg px-3 py-1 relative">
                     <FiShoppingCart className="w-[20px] h-[20px] text-main " />
-                    <span className="w-5 h-5 leading-5 text-center bg-primary rounded-full text-white absolute -top-2 -right-1 text-xs">2</span>
+                    <span className="w-5 h-5 leading-5 text-center bg-primary rounded-full text-white absolute -top-2 -right-1 text-xs">{item.length}</span>
                   </div>
                 </Link>
                 <div>
