@@ -5,45 +5,27 @@ import Image2 from "../../../public/Image (1).png"
 import Image3 from "../../../public/Image (2).png"
 import Image4 from "../../../public/Image (3).png"
 import ProductList from "../components/ProductList";
+import { ProductType } from "../lib/type"
+import { urlFor } from "@/sanity/lib/image"
 
-
-interface Category {
-    title: string,
-    slug: {
-        current: string
-    }
-}
-interface ProductType {
-    title: string,
-    image: string,
-    price: number,
-    sale?: boolean,
-    slug: {
-        current: string,
-    },
-    salePercentage?: number,
-    selectCategory?: Category[],
-    quantity: number,
-}
 
 const query = `*[_type == "product"]{
-    title,
-    image,
-    price,
-    sale,
-    salePercentage,
-     slug{
-      current
-    },
-    "category": selectCategory[]->{
-        "slug": slug.current,
-        "title": title,
-    },
+  _id,
+  title,
+  image,
+  price,
+  badge,
+  priceWithoutDiscount,
+}`
+
+const instagram=`*[_type == "products" && "instagram" in tags]{
+  image,
 }`
 
 export default async function Products() {
 
     const productData: ProductType[] = await client.fetch(query)
+    const instagramImages = await client.fetch(instagram)
 
     return (
         <>
@@ -67,11 +49,16 @@ export default async function Products() {
                     <div className="flex justify-center flex-col gap-10 text-center">
                         <h2 className="text-lg sm:text-2xl lg:text-4xl xl:text-5xl font-bold text-main capitalize">follow products and discounts on instagram</h2>
                         <div className="grid grid-cols-5 gap-5">
-                            <Image src={Image1} alt="img" />
+                            {
+                                instagramImages.map((image: any, index: number) => (
+                                    <Image key={index} src={urlFor(image.image).url()} alt="img" />
+                                ))
+                            }
+                            {/* <Image src={Image1} alt="img" />
                             <Image src={Image2} alt="img" />
                             <Image src={Image3} alt="img" />
                             <Image src={Image4} alt="img" />
-                            <Image src={Image1} alt="img" />
+                            <Image src={Image1} alt="img" /> */}
                         </div>
                     </div>
                 </div>

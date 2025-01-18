@@ -1,21 +1,5 @@
-// import { FieldGroup } from '@sanity/types'; 
-// import { SanityDocument } from '@sanity/client'; 
-
-//Get Discount Value
-
-// interface DiscountValueInputProps extends FieldGroup {
-//     document: SanityDocument & {
-//       sale: boolean;
-//       salePercentage: number;
-//       price: number;
-//     };
-//   }
-// const DiscountValueInput = (props:DiscountValueInputProps) => {
-//     const { sale, salePercentage, price } = props.document;  
-//     const discountValue = sale && salePercentage ? price * (salePercentage / 100) : 0;
-//     return discountValue
-// }
-
+import { v4 as uuidv4 } from 'uuid';
+import { defineField, defineType } from 'sanity';
 //Schema for product
 export const product = {
     name: "product",
@@ -51,7 +35,7 @@ export const product = {
             name: "sale",
             title: "Sale",
             type: "boolean",
-            initialValue:false,
+            initialValue: false,
             options: {
                 layout: "checkbox"
             }
@@ -62,21 +46,11 @@ export const product = {
             type: "number",
             hidden: ({ document }: any) => document.sale === false,
         },
-        // {
-        //     name: 'discountValue',
-        //     title: 'Discount Value',
-        //     type: 'number',
-        //     readOnly: true,
-        //     options: {
-        //       isHighlighted: true,
-        //     },
-        //     inputComponent: DiscountValueInput,
-        // },
         {
             name: "selectCategory",
             title: "Select Category",
             type: "array",
-            of: [{type: "reference", to: [{ type: "category" }],},],
+            of: [{ type: "reference", to: [{ type: "category" }], },],
             validation: (rule: any) => rule.required()
         },
         {
@@ -89,5 +63,12 @@ export const product = {
             },
             validation: (rule: any) => rule.required(),
         },
+        {
+            name: 'uniqueId',
+            title: 'Unique ID',
+            type: 'string',
+            initialValue: () => uuidv4(),
+            readOnly: true,
+        }
     ]
 }

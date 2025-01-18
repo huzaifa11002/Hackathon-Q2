@@ -2,17 +2,8 @@ import React from 'react'
 import Image from "next/image"
 import { IoMdHeartEmpty } from "react-icons/io";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { Cart } from '../lib/type';
 
-interface Cart {
-    title: string,
-    price: number,
-    quantity: number,
-    image: string,
-    slug:{
-        current: string,
-      },
-      onClick?: React.MouseEventHandler<SVGElement>
-}
 const CartCard = (props: Cart) => {
     return (
         <>

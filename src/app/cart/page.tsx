@@ -6,27 +6,36 @@ import { RootState } from "../redux/store";
 import { remove } from "../redux/cartslice";
 import CartCard from "../components/CartCard";
 import { urlFor } from "@/sanity/lib/image";
+import { useRouter } from "next/router";
 
 interface CartType {
     title: string,
     price: number,
     quantity: number,
     image: string,
-    slug: {
-        current: string,
-    },
+    _id: string,
 }
 export default function Cart() {
 
     const dispatch = useDispatch();
     const cartItem = useSelector((state: RootState) => state.cart)
+    const router = useRouter();
 
-    const handleRemoveItem = (slug: string) => {
-        dispatch(remove(slug))
+    const handleRemoveItem = (_id: string) => {
+        dispatch(remove(_id))
     }
     const totalValue = cartItem.reduce((total, item) => {
         return total + item.price * item.quantity;
     }, 0);
+
+    const moveToCheckOut = () => {
+        if (cartItem.length > 0) {
+            router.push('/checkout');
+        }
+        else {
+            alert('Your cart is empty')
+        }
+    }
 
     return (
         <>
@@ -45,7 +54,7 @@ export default function Cart() {
                                     key={index}
                                     {...item}
                                     image={urlFor(item.image).url()}
-                                    onClick={() => handleRemoveItem(item.slug.current)}
+                                    onClick={() => handleRemoveItem(item._id)}
                                 />
                             ))
                         )}
@@ -71,7 +80,7 @@ export default function Cart() {
                                 <span className="font-bold text-xs lg:text-sm xl:text-base">{totalValue.toFixed(2)}</span>
                             </div>
                             <div className="flex justify-center">
-                                <Button value="member checkout" />
+                                <Button value="member checkout" onClick={() => moveToCheckOut()} />
                             </div>
 
                         </div>

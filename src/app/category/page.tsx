@@ -4,19 +4,21 @@ import { urlFor } from "@/sanity/lib/image"
 import CategoryCard from "../components/CategoryCard";
 
 interface categoryType {
+  _id: string,
   title: string,
   image: string,
-  slug: { current: string };
+  products:number,
 }
 
-const query = `*[_type == "category"]{
+const query = `*[_type == "categories"]{
+    _id,
     title,
     image,
-    slug{current}
+    products,
 }`
 
 const page = async () => {
-    const data: categoryType[] = await client.fetch(query)
+  const data: categoryType[] = await client.fetch(query)
   return (
     <>
       <div className="w-[1440px] mx-auto max-w-[90%] my-20">
@@ -26,8 +28,8 @@ const page = async () => {
             {
               data.map((category, index) => {
                 return (
-                  <Link href={`/category/${category.slug.current}`} key={index}>
-                    <CategoryCard {...category} products="123 products" image={urlFor(category.image).url()} />
+                  <Link href={`/category/${category._id}`} key={index}>
+                    <CategoryCard {...category} image={urlFor(category.image).url()} />
                   </Link>
                 )
               })

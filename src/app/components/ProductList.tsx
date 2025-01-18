@@ -4,26 +4,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { add } from "../redux/cartslice";
 import Card from './Card';
-
-interface Category {
-    title: string,
-    slug: {
-        current: string
-    }
-}
-
-interface ProductType {
-    title: string,
-    image: any, // Adjust the type based on your actual image type
-    price: number,
-    sale?: boolean,
-    slug: {
-        current: string,
-    },
-    salePercentage?: number,
-    selectCategory?: Category[],
-    quantity: number,
-}
+import { ProductType} from '../lib/type';
 
 interface ProductListProps {
     productData: ProductType[]
@@ -37,7 +18,7 @@ const ProductList = ({ productData }: ProductListProps) => {
             price: product.price,
             quantity: 1, // Default quantity
             image: urlFor(product.image).url(),
-            slug: product.slug,
+            _id: product._id,
         };
         dispatch(add(cartItem));
     };

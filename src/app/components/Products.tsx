@@ -1,42 +1,19 @@
 import { client } from "@/sanity/lib/client"
 import ProductList from "./ProductList"
+import { ProductType } from "../lib/type"
 
-interface Category {
-  title: string,
-  slug: {
-    current: string
-  }
-}
-interface ProductType {
-  title: string,
-  image: string,
-  price: number,
-  sale?: boolean,
-  slug:{
-    current: string,
-  },
-  salePercentage?: number,
-  selectCategory?: Category[],
-  quantity:number
-}
 
-const query = `*[_type == "product"]{
+const query = `*[_type == "products"]{
+   _id,
   title,
   image,
   price,
-  sale,
-  salePercentage,
-  slug{
-      current
-    },
-  "category": selectCategory[]->{
-      "slug": slug.current,
-      "title": title,
-  },
-}[0...8]`
+  badge,
+  priceWithoutDiscount
+  }[0...8]`
 
 const Products = async () => {
-  const productData: ProductType[] = await client.fetch(query)
+ const productData: ProductType[] = await client.fetch(query)
   return (
     <div className="w-[1440px] mx-auto max-w-[90%] my-20">
       <div className="flex flex-col gap-10">

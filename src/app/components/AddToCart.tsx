@@ -3,19 +3,9 @@ import { useDispatch } from 'react-redux'
 import { add } from "../redux/cartslice";
 import { FiShoppingCart } from "react-icons/fi";
 import Button from './Button';
+import { AddToCartButton } from '../lib/type';
 
-interface AddToCartButtonProps {
-    product: {
-        title: string;
-        price: number;
-        image: string;
-        slug: {
-            current: string;
-        };
-        quantity: number;
-    };
-}
-const AddToCart = ({ product }: AddToCartButtonProps) => {
+const AddToCart = ({ product }: AddToCartButton) => {
     const dispatch = useDispatch();
 
     const handleAddToCart = () => {

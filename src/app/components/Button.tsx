@@ -1,11 +1,5 @@
+import { ButtonType } from "../lib/type"
 
-interface ButtonType {
-    value?: string,
-    type?:'button' | 'submit' | 'reset',
-    onClick?: React.MouseEventHandler<HTMLButtonElement>
-    iconLeft?: React.ReactElement
-    iconRight?: React.ReactElement
-}
 
 const Button = (props: ButtonType) => {
     return (

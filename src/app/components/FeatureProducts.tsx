@@ -1,28 +1,14 @@
 import { client } from "@/sanity/lib/client"
 import ProductList from "./ProductList"
+import { ProductType } from "../lib/type"
 
-
-interface ProductType {
-  title: string,
-  image: string,
-  price: number,
-  sale?: boolean,
-  salePercentage?: number,
-  slug: {
-    current: string
-  },
-  quantity:number
-}
-
-const query = `*[_type == "product"]{
+const query = `*[_type == "products" && "featured" in tags]{
+  _id,
   title,
   image,
   price,
-  sale,
-  salePercentage,
-  slug{
-    current
-  }
+  badge,
+  priceWithoutDiscount,
 }[0...4]`
 
 const FeatureProducts = async () => {

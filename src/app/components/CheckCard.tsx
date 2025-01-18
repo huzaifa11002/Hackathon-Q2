@@ -2,22 +2,20 @@ import React from 'react'
 import Image from 'next/image'
 import Link from "next/link"
 import { FiShoppingCart } from "react-icons/fi";
-import { CardProps } from '../lib/type';
+import { NewCardProps } from '../lib/type';
 
 
-const Card = (props: CardProps) => {
-
-  const getBadgeClass = (badge:string) => {
-    switch (badge) {
-      case 'Sales':
-        return 'bg-[#F5813F]';
-      case 'New':
-        return 'bg-green-500';
-      default:
-        return 'bg-gray-500';
-    }
-  };
-
+const CardNN = (props: NewCardProps) => {
+    const getBadgeClass = (badge:string) => {
+        switch (badge) {
+          case 'Sales':
+            return 'bg-[#F5813F]';
+          case 'New':
+            return 'bg-green-500';
+          default:
+            return 'bg-gray-500';
+        }
+      };
   return (
     <>
       <div className='w-full relative group cursor-pointer'>
@@ -38,7 +36,7 @@ const Card = (props: CardProps) => {
                   <p className='line-through text-gray text-xs lg:text-sm xl:text-base'>{`$${props.priceWithoutDiscount}`}</p>
                 </>
               ) : (
-                <p className='text-xs lg:text-sm xl:text-base'>{`$${props.price}`}</p>
+                <p className='text-xs lg:text-sm xl:text-base'>{`$${props.priceWithoutDiscount }`}</p>
               )}
             </div>
           </div>
@@ -57,4 +55,4 @@ const Card = (props: CardProps) => {
   )
 }
 
-export default Card
+export default CardNN

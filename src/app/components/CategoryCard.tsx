@@ -1,9 +1,10 @@
 import Image from 'next/image'
 
 interface CateProps {
-    title: string,
-    products: string,
-    image: string,
+  _id: string,
+  title: string,
+  image: string,
+  products:number,
 }
 const CategoryCard = (props: CateProps) => {
     return (

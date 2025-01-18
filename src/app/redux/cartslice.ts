@@ -1,26 +1,17 @@
 'use client'
-
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { Cart } from "../lib/type";
 
-interface CartType {
-    title: string,
-    price: number,
-    quantity: number,
-    image: string,
-    slug:{
-        current: string,
-      },
-}
 
 const cartSlice = createSlice({
-    name:"Cart",
-    initialState:[] as CartType[],
-    reducers:{
-        add(state, action:PayloadAction<CartType>){
+    name: "Cart",
+    initialState: [] as Cart[],
+    reducers: {
+        add(state, action: PayloadAction<Cart>) {
             state.push(action.payload)
         },
-        remove(state, action:PayloadAction<string>){
-           return state.filter((item)=> item.slug.current !== action.payload)
+        remove(state, action: PayloadAction<string>) {
+            return state.filter((item) => item._id !== action.payload)
         },
     },
 });
