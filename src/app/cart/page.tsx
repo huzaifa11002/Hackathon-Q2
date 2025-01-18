@@ -28,14 +28,14 @@ export default function Cart() {
         return total + item.price * item.quantity;
     }, 0);
 
-    const moveToCheckOut = () => {
-        if (cartItem.length > 0) {
-            router.push('/checkout');
-        }
-        else {
-            alert('Your cart is empty')
-        }
-    }
+    // const moveToCheckOut = () => {
+    //     if (cartItem.length > 0) {
+    //         router.push('/checkout');
+    //     }
+    //     else {
+    //         alert('Your cart is empty')
+    //     }
+    // }
 
     return (
         <>
@@ -80,7 +80,7 @@ export default function Cart() {
                                 <span className="font-bold text-xs lg:text-sm xl:text-base">{totalValue.toFixed(2)}</span>
                             </div>
                             <div className="flex justify-center">
-                                <Button value="member checkout" onClick={() => moveToCheckOut()} />
+                                <Button value="member checkout" />
                             </div>
 
                         </div>

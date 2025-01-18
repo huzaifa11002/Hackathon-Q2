@@ -1,15 +1,11 @@
 import { client } from "@/sanity/lib/client"
 import Image from "next/image"
-import Image1 from "../../../public/Image.png"
-import Image2 from "../../../public/Image (1).png"
-import Image3 from "../../../public/Image (2).png"
-import Image4 from "../../../public/Image (3).png"
 import ProductList from "../components/ProductList";
 import { ProductType } from "../lib/type"
 import { urlFor } from "@/sanity/lib/image"
 
 
-const query = `*[_type == "product"]{
+const query = `*[_type == "products"]{
   _id,
   title,
   image,
@@ -54,11 +50,6 @@ export default async function Products() {
                                     <Image key={index} src={urlFor(image.image).url()} alt="img" />
                                 ))
                             }
-                            {/* <Image src={Image1} alt="img" />
-                            <Image src={Image2} alt="img" />
-                            <Image src={Image3} alt="img" />
-                            <Image src={Image4} alt="img" />
-                            <Image src={Image1} alt="img" /> */}
                         </div>
                     </div>
                 </div>
