@@ -16,7 +16,7 @@ const query = `*[_type == "products"]{
 
 const instagram=`*[_type == "products" && "instagram" in tags]{
   image,
-}`
+},[0..4]`
 
 export default async function Products() {
 
