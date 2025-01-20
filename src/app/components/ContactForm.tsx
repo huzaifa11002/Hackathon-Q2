@@ -3,17 +3,25 @@ import Button from './Button'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormSchema, InputFields } from '../lib/type';
-
-
+import { client } from '@/sanity/lib/client';
 
 const ContactForm = () => {
 
-    const onSubmit: SubmitHandler<InputFields> = (data) => {
-        // Handle form submission
-        console.log(data);
+    const onSubmit: SubmitHandler<InputFields> = async (data) => {
+
+        await client.create({
+            _type: 'contactForm',
+            name: data.name,
+            email: data.email,
+            subject: data.subject,
+            message: data.message,
+        })
+
+        alert("Your Contact Form Submitted Successfully")
+        reset();
     }
     
-    const { register, handleSubmit, formState: { errors }, trigger } = useForm<InputFields>({
+    const { register, handleSubmit, formState: { errors }, trigger , reset } = useForm<InputFields>({
         resolver: zodResolver(FormSchema)
     });
 

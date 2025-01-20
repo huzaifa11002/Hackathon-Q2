@@ -6,7 +6,7 @@ import { RootState } from "../redux/store";
 import { remove } from "../redux/cartslice";
 import CartCard from "../components/CartCard";
 import { urlFor } from "@/sanity/lib/image";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 interface CartType {
     title: string,
@@ -17,9 +17,9 @@ interface CartType {
 }
 export default function Cart() {
 
+    const router = useRouter();
     const dispatch = useDispatch();
     const cartItem = useSelector((state: RootState) => state.cart)
-    const router = useRouter();
 
     const handleRemoveItem = (_id: string) => {
         dispatch(remove(_id))
@@ -28,14 +28,14 @@ export default function Cart() {
         return total + item.price * item.quantity;
     }, 0);
 
-    // const moveToCheckOut = () => {
-    //     if (cartItem.length > 0) {
-    //         router.push('/checkout');
-    //     }
-    //     else {
-    //         alert('Your cart is empty')
-    //     }
-    // }
+    const moveToCheckOut = () => {
+        if (cartItem.length > 0) {
+            router.push('/checkout');
+        }
+        else {
+            alert('Your cart is empty')
+        }
+    }
 
     return (
         <>
@@ -63,7 +63,7 @@ export default function Cart() {
                     <div className="lg:w-1/4 w-full">
                         <div className="flex flex-col gap-10 text-main">
                             <div>
-                                <h3 className="font-medium text-xl">Summary</h3>
+                                <h3 className="font-base text-xl">Summary</h3>
                             </div>
                             <div className="flex flex-col gap-5 text-sm">
                                 <div className="flex justify-between items-center">
@@ -80,7 +80,7 @@ export default function Cart() {
                                 <span className="font-bold text-xs lg:text-sm xl:text-base">{totalValue.toFixed(2)}</span>
                             </div>
                             <div className="flex justify-center">
-                                <Button value="member checkout" />
+                                <Button value="member checkout" onClick={moveToCheckOut} />
                             </div>
 
                         </div>
