@@ -17,27 +17,36 @@ const UserInfo = () => {
     const cartItem = useSelector((state: RootState) => state.cart)
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
 
-        const orderId = generateOrderId();
+        try {
+            // Generate custom order ID
+            const orderId = generateOrderId();
 
-        const userInfo = await client.create({
-            _type: "userInfo",
-            name: data.name,
-            email: data.email,
-            phone: data.phone,
-            address1: data.address1,
-            address2: data.address2,
-            zipcode: data.zipcode,
-        });
+            // Create userInfo document and capture the result
+            const userInfo = await client.create({
+                _type: 'userInfo',
+                name: data.name,
+                email: data.email,
+                phone: data.phone,
+                address1: data.address1,
+                address2: data.address2,
+                zipcode: data.zipcode
+            });
 
-        await client.create({
-            _type: 'order',
-            orderId: orderId,
-            userId: { _type: 'reference', _ref: userInfo._id },
-            cartItems: cartItem.map(item => ({ _type: 'reference', _ref: item._id, _key: item._id })),
-        });
+            // Create order document using the userInfo._id and custom orderId
+            await client.create({
+                _type: 'order',
+                orderId: orderId,
+                userId: { _type: 'reference', _ref: userInfo._id },
+                cartItems: cartItem.map(item => ({ _type: 'reference', _ref: item._id })),
+            });
 
-        alert("Your Order has been placed")
-        reset();
+            alert("Your Order has been placed");
+            reset();
+            
+        } catch (error) {
+            console.error("Error creating documents:", error);
+            alert("There was an error placing your order. Please try again.");
+        }
     }
 
     const { register, handleSubmit, formState: { errors }, trigger, reset } = useForm<Inputs>({

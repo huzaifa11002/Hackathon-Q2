@@ -2,6 +2,7 @@
 import { useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
 import { useRef } from 'react'
+import { useRouter } from "next/navigation";
 
 interface CartType {
     title: string,
@@ -13,8 +14,18 @@ interface CartType {
 
 const CheckoutCard = () => {
     const cartItem = useSelector((state: RootState) => state.cart)
+    const router = useRouter();
     const onlinePayRef = useRef<HTMLInputElement>(null);
     const codRef = useRef<HTMLInputElement>(null);
+
+    const handlePayment = () => {
+        if (onlinePayRef.current?.checked) {
+            alert("Online payment is not available.");
+        } else if (codRef.current?.checked) {
+            router.push('/order');
+        }
+    };
+
     return (
         <div className=' p-5 rounded shadow-lg shadow-main flex flex-col gap-5'>
             <div className='flex flex-col gap-3'>

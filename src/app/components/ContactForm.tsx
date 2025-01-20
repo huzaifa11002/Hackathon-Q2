@@ -9,17 +9,23 @@ const ContactForm = () => {
 
     const onSubmit: SubmitHandler<InputFields> = async (data) => {
 
-        await client.create({
-            _type: 'contactForm',
-            name: data.name,
-            email: data.email,
-            subject: data.subject,
-            message: data.message,
-        })
+        try {
+            const contactForm = await client.create({
+                _type: 'contactForm',
+                name: data.name,
+                email: data.email,
+                subject: data.subject,
+                message: data.message,
+            })
 
-        alert("Your Contact Form Submitted Successfully")
-        reset();
-    }
+            alert("Your Contact Form Submitted Successfully")
+            reset();
+        }
+        catch (error) {
+            console.error("Error creating documents:", error);
+            alert("There was an error submitting your form. Please try again.");
+        }
+    };
     
     const { register, handleSubmit, formState: { errors }, trigger , reset } = useForm<InputFields>({
         resolver: zodResolver(FormSchema)
