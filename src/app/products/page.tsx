@@ -1,27 +1,23 @@
 import { client } from "@/sanity/lib/client"
-import Image from "next/image"
 import ProductList from "../components/ProductList";
 import { ProductType } from "../lib/type"
-import { urlFor } from "@/sanity/lib/image"
-
+import InstaImage from "../components/InstaImage";
 
 const query = `*[_type == "products"]{
-  _id,
-  title,
-  image,
-  price,
-  badge,
-  priceWithoutDiscount,
-}`
+    _id,
+   title,
+   image,
+   price,
+   badge,
+   priceWithoutDiscount
+   }`
 
-const instagram = `*[_type == "products" && "instagram" in tags]{
-  image,
-},[0..4]`
+
 
 export default async function Products() {
 
     const productData: ProductType[] = await client.fetch(query)
-    const instagramImages = await client.fetch(instagram)
+
 
     return (
         <>
@@ -44,13 +40,7 @@ export default async function Products() {
 
                     <div className="flex justify-center flex-col gap-10 text-center">
                         <h2 className="text-lg sm:text-2xl lg:text-4xl xl:text-5xl font-bold text-main capitalize">follow products and discounts on instagram</h2>
-                        <div className="grid grid-cols-5 gap-5">
-                            {
-                                instagramImages.map((image: any, index: number) => (
-                                    <Image key={index} src={urlFor(image.image).url()} alt="img" />
-                                ))
-                            }
-                        </div>
+                        {await InstaImage()}
                     </div>
                 </div>
             </div>
