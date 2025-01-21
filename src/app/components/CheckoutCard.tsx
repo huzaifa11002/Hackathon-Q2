@@ -38,25 +38,25 @@ const CheckoutCard = () => {
                         </li>
                     ))}
                 </ul>
-                
+
             </div>
             <div className='flex flex-col gap-3'>
                 <h3 className="font-base text-xl">Payment Method</h3>
                 <div className='flex flex-col gap-1'>
                     <div className='flex flex-row gap-1 items-center'>
-                    <input ref={onlinePayRef} type="radio" name="payment" id="onlinepay" />
-                    <label htmlFor="onlinepay" className=" text-main text-sm sm:text-lg">Online Payment</label>
+                        <input ref={onlinePayRef} type="radio" name="payment" id="onlinepay" />
+                        <label htmlFor="onlinepay" className=" text-main text-sm sm:text-lg">Online Payment</label>
                     </div>
                     <div className='flex flex-row gap-1 items-center'>
-                    <input ref={codRef} type="radio" name="payment" id="cod" />
-                    <label htmlFor="cod" className=" text-main text-sm sm:text-lg">Cash On Delivery</label>
+                        <input ref={codRef} type="radio" name="payment" id="cod" />
+                        <label htmlFor="cod" className=" text-main text-sm sm:text-lg">Cash On Delivery</label>
                     </div>
                 </div>
                 <div className='flex flex-row justify-between items-center'>
-                <h3 className="font-base text-xl">Total Amount</h3>
-                <p className="font-base text-xl">${cartItem.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)}</p>
+                    <h3 className="font-base text-xl">Total Amount</h3>
+                    <p className="font-base text-xl">${cartItem.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)}</p>
                 </div>
-                <button form='checkout+userInfo' className='bg-primary text-white font-bold py-2 rounded mt-5'>Checkout</button>
+                <button form='checkout+userInfo' onClick={handlePayment} className='bg-primary text-white font-bold py-2 rounded mt-5'>Checkout</button>
             </div>
         </div>
     );

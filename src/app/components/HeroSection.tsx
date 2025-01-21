@@ -17,8 +17,8 @@ const HeroSection = () => {
                         <Button value="shop now" iconRight={<IoIosArrowRoundForward className="w-[24px] h-[24px]"/>}/>
                     </div>
                 </div>
-                <div>
-                    <Image src={HeroImg} alt="hero-img" className="w-full md:w-[300px]"/>
+                <div className="flex justify-center items-center">
+                    <Image src={HeroImg} alt="hero-img" className="w-full md:w-[300px] xs:w-[300px]"/>
                 </div>
             </div>
         </>

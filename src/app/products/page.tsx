@@ -5,24 +5,24 @@ import { ProductType } from "../lib/type"
 import { urlFor } from "@/sanity/lib/image"
 
 
-const query = `*[_type == "products"]{
-  _id,
-  title,
-  image,
-  price,
-  badge,
-  priceWithoutDiscount,
-}`
-
-const instagram = `*[_type == "products" && "instagram" in tags]{
-  image,
-},[0..4]`
-
 export default async function Products() {
 
     try {
+
+        const query = `*[_type == "products"]{
+            _id,
+            title,
+            image,
+            price,
+            badge,
+            priceWithoutDiscount,
+          }`
+          
+          const instagramQuery = `*[_type == "products" && "instagram" in tags]{
+            image,
+          },[0..4]`
         const productData: ProductType[] = await client.fetch(query)
-        const instagramImages = await client.fetch(instagram)
+        const instagramImages = await client.fetch(instagramQuery)
         return (
             <>
                 <title>Products</title>
