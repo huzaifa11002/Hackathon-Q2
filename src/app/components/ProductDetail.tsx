@@ -6,7 +6,7 @@ import { Image as IImage } from "sanity";
 import Count from "@/app/components/Count";
 import AddToCart from "@/app/components/AddToCart";
 import { ProductType } from '../lib/type';
-
+import { useRouter } from "next/router";
 interface ProductDetailsProps {
     productData: ProductType;
     error?:any;
@@ -14,6 +14,20 @@ interface ProductDetailsProps {
 
 const ProductDetails= ({ productData, error}:ProductDetailsProps) => {
 
+  const router = useRouter();
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
+    if (!isMounted) {
+        return <div>Loading...</div>;
+    }
+
+    if (router.isFallback) {
+        return <div>Loading...</div>;
+    }
 
     if (error || !productData) {
         return (
@@ -23,6 +37,8 @@ const ProductDetails= ({ productData, error}:ProductDetailsProps) => {
             </div>
         );
     }
+
+  
 
     const [quantity, setQuantity] = useState(1);
 
