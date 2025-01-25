@@ -9,9 +9,8 @@ interface Params {
 }
 
 const page = async ({ params }: { params: Params }) => {
-  let slug = `"${params.id}"`;
 
-  const query = `*[_type == "products" && _id == ${slug}][0]`
+  const query = `*[_type == "products" && _id == "${params.id}"][0]`
   const productData: ProductType = await client.fetch(query)
 
   return (

@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import { Image as IImage } from "sanity";
@@ -9,9 +9,21 @@ import { ProductType } from '../lib/type';
 
 interface ProductDetailsProps {
     productData: ProductType;
+    error?:any;
 }
 
-const ProductDetails= ({ productData }:ProductDetailsProps) => {
+const ProductDetails= ({ productData, error}:ProductDetailsProps) => {
+
+
+    if (error || !productData) {
+        return (
+            <div>
+                <h2 className="text-lg lg:text-3xl font-semibold text-main capitalize">Product Not Found</h2>
+                <p className="text-xs lg:text-base">We couldn't find the product you are looking for</p>
+            </div>
+        );
+    }
+
     const [quantity, setQuantity] = useState(1);
 
     const handleQuantityChange = (newQuantity: number) => {
