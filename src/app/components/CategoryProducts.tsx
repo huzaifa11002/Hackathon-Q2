@@ -2,6 +2,7 @@ import CategoryCard from "./CategoryCard"
 import Link from "next/link"
 import { client } from "@/sanity/lib/client"
 import { urlFor } from "@/sanity/lib/image"
+import Products from "../products/page"
 
 interface categoryType {
   _id: string,
@@ -14,7 +15,7 @@ const query = `*[_type == "categories"]{
   _id,
   title,
   image,
-  products
+  products,
 }`
 
 const CategoryProducts = async () => {
@@ -28,7 +29,7 @@ const CategoryProducts = async () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
             {data.map((category, index) => (
             <Link href={`/category/${category._id}`} key={index}>
-              <CategoryCard {...category} image={urlFor(category.image).url()} />
+              <CategoryCard {...category} image={urlFor(category.image).url()} products={category.products}/>
             </Link>
           ))}
           </div>

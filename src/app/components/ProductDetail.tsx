@@ -15,15 +15,6 @@ interface ProductDetailsProps {
 const ProductDetails= ({ productData, error}:ProductDetailsProps) => {
 
   const router = useRouter();
-    const [isMounted, setIsMounted] = useState(false);
-
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
-
-    if (!isMounted) {
-        return <div>Loading...</div>;
-    }
 
     if (router.isFallback) {
         return <div>Loading...</div>;
