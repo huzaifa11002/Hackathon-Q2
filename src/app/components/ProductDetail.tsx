@@ -24,7 +24,7 @@ const ProductDetails= ({ productData, error}:ProductDetailsProps) => {
         return (
             <div>
                 <h2 className="text-lg lg:text-3xl font-semibold text-main capitalize">Product Not Found</h2>
-                <p className="text-xs lg:text-base">We couldn't find the product you are looking for</p>
+                <p className="text-xs lg:text-base">We couldn&apos;t find the product you are looking for</p>
             </div>
         );
     }
