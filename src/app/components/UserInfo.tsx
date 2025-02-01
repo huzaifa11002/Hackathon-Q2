@@ -3,8 +3,11 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserInfoSchema, Inputs } from '../lib/type';
 import { client } from '@/sanity/lib/client';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { clearCart  } from '../redux/cartslice';
 import { RootState } from '../redux/store';
+import { MdOutlineError } from "react-icons/md";
+import { toast, Bounce } from 'react-toastify';
 
 let orderCounter = 0;
 
@@ -15,6 +18,8 @@ const generateOrderId = () => {
 
 const UserInfo = () => {
     const cartItem = useSelector((state: RootState) => state.cart)
+    const dispatch = useDispatch();
+    const totalPayment = cartItem.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
 
         try {
@@ -38,14 +43,26 @@ const UserInfo = () => {
                 orderId: orderId,
                 userId: { _type: 'reference', _ref: userInfo._id },
                 cartItems: cartItem.map(item => ({ _type: 'reference', _ref: item._id })),
+                totalAmount: totalPayment
             });
 
-            alert("Your Order has been placed");
+            dispatch(clearCart());
             reset();
-            
+
         } catch (error) {
             console.error("Error creating documents:", error);
-            alert("There was an error placing your order. Please try again.");
+            toast.error('Fill the form correctly', {
+                icon: <MdOutlineError className="w-[16px] h-[16px]" />,
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Bounce,
+            });
         }
     }
 
@@ -97,7 +114,7 @@ const UserInfo = () => {
                         onBlur={() => trigger("address1")}
                         name="address1"
                         type="text"
-                        placeholder="enter your address"
+                        placeholder="Enter your address"
                         className={`p-3 bg-transparent border border-gray outline-none rounded-md placeholder:text-gray text-xs lg:text-sm xl:text-base focus:outline-2 focus:outline-main focus:border-none`} />
                     {errors.address1 && <p className="text-red-500">{errors.address1.message}</p>}
                 </div>
@@ -107,6 +124,7 @@ const UserInfo = () => {
                         {...register("address2")}
                         onBlur={() => trigger("address2")}
                         name="address2"
+                        placeholder="Enter your address"
                         type="text"
                         className={`p-3 bg-transparent border border-gray outline-none rounded-md placeholder:text-gray text-xs lg:text-sm xl:text-base focus:outline-2 focus:outline-main focus:border-none`} />
                     {errors.address2 && <p className="text-red-500">{errors.address2.message}</p>}

@@ -7,6 +7,7 @@ import { remove } from "../redux/cartslice";
 import CartCard from "../components/CartCard";
 import { urlFor } from "@/sanity/lib/image";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface CartType {
     title: string,
@@ -47,7 +48,12 @@ export default function Cart() {
                             <h3 className="font-medium text-xl">Bag</h3>
                         </div>
                         {cartItem.length === 0 ? (
+                            <div className="flex flex-col gap-3 items-center justify-center">
                             <p className='text-xs lg:text-sm xl:text-base my-5'>Your Cart is Empty</p>
+                            <Link href="/products">
+                            <Button value="go to shopping" />
+                            </Link>
+                            </div>
                         ) : (
                             cartItem.map((item: CartType, index) => (
                                 <CartCard
@@ -80,7 +86,7 @@ export default function Cart() {
                                 <span className="font-bold text-xs lg:text-sm xl:text-base">{totalValue.toFixed(2)}</span>
                             </div>
                             <div className="flex justify-center">
-                                <Button value="member checkout" onClick={moveToCheckOut} />
+                                <Button disabled={cartItem.length === 0} value="member checkout" onClick={moveToCheckOut} />
                             </div>
 
                         </div>

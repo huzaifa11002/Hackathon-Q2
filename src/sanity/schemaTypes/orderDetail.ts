@@ -30,5 +30,11 @@ export const orderSchema = defineType({
       ],
       validation: (Rule) => Rule.required().error('Cart items are required'),
     }),
+    defineField({
+      name: 'totalAmount',
+      title: 'Total Amount',
+      type: 'number',
+      validation: (Rule) => Rule.required().error('Total Amount is required'),
+    }),
   ],
 });

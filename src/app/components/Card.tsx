@@ -23,7 +23,7 @@ const Card = (props: CardProps) => {
       <div className='w-full relative group cursor-pointer'>
         <div className='mb-5'>
           <Link href={`/products/${props._id}`}>
-            <Image src={props.image} alt={props.title} width={500} height={500} className='w-full object-contain object-top' />
+            <Image src={props.image} alt={props.title} width={500} height={500} className='w-full object-contain object-top rounded-2xl' />
           </Link>
         </div>
         <div className='flex flex-col sm:flex-row items-center sm:items-start sm:justify-between gap-3'>

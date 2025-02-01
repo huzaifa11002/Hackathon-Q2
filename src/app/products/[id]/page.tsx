@@ -2,6 +2,7 @@ import { client } from "@/sanity/lib/client"
 import FeatureProducts from "@/app/components/FeatureProducts";
 import ProductDetails from "@/app/components/ProductDetail";
 import { ProductType } from "@/app/lib/type";
+import { Suspense } from "react";
 
 
 interface Params {
@@ -16,8 +17,15 @@ const page = async ({ params }: { params: Params }) => {
   return (
     <>
       <div className="w-[1440px] mx-auto max-w-[90%] my-20">
+
+        <Suspense>
         <ProductDetails productData={productData} />
+        </Suspense>
+
+        <Suspense>
         {await FeatureProducts()}
+        </Suspense>
+        
       </div>
     </>
   )

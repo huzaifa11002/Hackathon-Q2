@@ -2,6 +2,7 @@ import Link from "next/link"
 import { client } from "@/sanity/lib/client"
 import { urlFor } from "@/sanity/lib/image"
 import CategoryCard from "../components/CategoryCard";
+import { Suspense } from "react";
 
 interface categoryType {
   _id: string,
@@ -29,7 +30,9 @@ const page = async () => {
               data.map((category, index) => {
                 return (
                   <Link href={`/category/${category._id}`} key={index}>
+                    <Suspense>
                     <CategoryCard {...category} image={urlFor(category.image).url()} />
+                    </Suspense>
                   </Link>
                 )
               })

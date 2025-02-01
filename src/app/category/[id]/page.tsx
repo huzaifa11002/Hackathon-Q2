@@ -3,6 +3,7 @@ import { urlFor } from "@/sanity/lib/image"
 import Card from "@/app/components/Card";
 import { ProductType } from "@/app/lib/type";
 import InstaImage from "@/app/components/InstaImage";
+import { Suspense } from "react";
 
 interface Params {
   id: string;
@@ -62,8 +63,9 @@ const page = async ({ params }: { params: Params }) => {
 
           <div className="flex justify-center flex-col gap-10 text-center">
             <h2 className="text-lg sm:text-2xl lg:text-4xl xl:text-5xl font-bold text-main capitalize">follow products and discounts on instagram</h2>
-
+            <Suspense>
             {await InstaImage()}
+            </Suspense>
           </div>
         </div>
       </div>

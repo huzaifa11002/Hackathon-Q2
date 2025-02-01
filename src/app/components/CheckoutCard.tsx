@@ -1,8 +1,11 @@
 "use client"
 import { useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
-import { useRef } from 'react'
+import { useState } from 'react'
 import { useRouter } from "next/navigation";
+import { MdShoppingBasket} from "react-icons/md";
+import { toast, Bounce } from 'react-toastify';
+
 
 interface CartType {
     title: string,
@@ -15,15 +18,29 @@ interface CartType {
 const CheckoutCard = () => {
     const cartItem = useSelector((state: RootState) => state.cart)
     const router = useRouter();
-    const onlinePayRef = useRef<HTMLInputElement>(null);
-    const codRef = useRef<HTMLInputElement>(null);
+    const [paymentMethod, setPaymentMethod] = useState<string>('');
+    const handlePaymentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setPaymentMethod(event.target.value);
+    };
 
-    const handlePayment = () => {
-        if (onlinePayRef.current?.checked) {
-            alert("Online payment is not available.");
-        } else if (codRef.current?.checked) {
-            router.push('/order');
-        }
+    const handleSubmit = () => {
+            if (paymentMethod === 'cod') {
+                toast.success('Order has been placed', {
+                    icon: <MdShoppingBasket className="w-[16px] h-[16px]" />,
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                    transition: Bounce,
+                });
+            }
+            if (paymentMethod === 'online') {
+                router.push('/payment')
+            }
     };
 
     return (
@@ -44,11 +61,11 @@ const CheckoutCard = () => {
                 <h3 className="font-base text-xl">Payment Method</h3>
                 <div className='flex flex-col gap-1'>
                     <div className='flex flex-row gap-1 items-center'>
-                        <input ref={onlinePayRef} type="radio" name="payment" id="onlinepay" />
+                        <input onChange={handlePaymentChange} value="online" type="radio" name="payment" id="onlinepay" />
                         <label htmlFor="onlinepay" className=" text-main text-sm sm:text-lg">Online Payment</label>
                     </div>
                     <div className='flex flex-row gap-1 items-center'>
-                        <input ref={codRef} type="radio" name="payment" id="cod" />
+                        <input onChange={handlePaymentChange} value="cod" type="radio" name="payment" id="cod" />
                         <label htmlFor="cod" className=" text-main text-sm sm:text-lg">Cash On Delivery</label>
                     </div>
                 </div>
@@ -56,7 +73,11 @@ const CheckoutCard = () => {
                     <h3 className="font-base text-xl">Total Amount</h3>
                     <p className="font-base text-xl">${cartItem.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)}</p>
                 </div>
-                <button form='checkout+userInfo' onClick={handlePayment} className='bg-primary text-white font-bold py-2 rounded mt-5'>Checkout</button>
+                <button form='checkout+userInfo'
+                    onClick={handleSubmit}
+                    disabled={paymentMethod == "" || cartItem.length == 0}
+                    className={`bg-primary text-white font-bold py-2 rounded mt-5 ${paymentMethod == "" || cartItem.length == 0? 'opacity-50 cursor-not-allowed' : 'opacity-100'}`}>
+                    Checkout</button>
             </div>
         </div>
     );

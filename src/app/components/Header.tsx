@@ -35,7 +35,7 @@ const Header = () => {
     <>
       <header>
 
-      {/*Main Header */}
+        {/*Main Header */}
 
 
         <div className="hidden sm:block">
@@ -86,8 +86,8 @@ const Header = () => {
                   <li><Link href="/" className={`hover:text-primary `}>Home</Link></li>
                   <li><Link href="/products" className={`hover:text-primary `}>Shop</Link></li>
                   <li><Link href="/category" className={`hover:text-primary `}>All Categories</Link></li>
-                  <li><Link href="/productpage" className={`hover:text-primary`}>Pages</Link></li>
                   <li><Link href="/about" className={`hover:text-primary `}>About</Link></li>
+                  <li><Link href="/contact" className={`hover:text-primary`}>Contact</Link></li>
                 </ul>
               </nav>
               <div className="flex justify-between items-center gap-2">
@@ -98,11 +98,11 @@ const Header = () => {
           </div>
         </div>
 
-      {/* Responsive Header */}
+        {/* Responsive Header */}
 
-      <div className="sm:hidden">
+        <div className="sm:hidden">
 
-        {/*Top Bar */}
+          {/*Top Bar */}
           <div className="w-full bg-main ">
             <div className="w-[1440px] mx-auto max-w-[90%] h-[45px] flex justify-between items-center text-white text-xs ">
               <div className="flex gap-1 items-center">
@@ -122,7 +122,7 @@ const Header = () => {
             </div>
           </div>
 
-           {/*Logo Bar */}
+          {/*Logo Bar */}
           <div className="w-full bg-sky">
             <div className="w-[1440px] mx-auto max-w-[90%] h-[85px] flex justify-between items-center ">
               <Link href="/">
@@ -154,13 +154,13 @@ const Header = () => {
                 <li><Link href="/" className={`hover:text-primary `}>Home</Link></li>
                 <li><Link href="/products" className={`hover:text-primary `}>Shop</Link></li>
                 <li><Link href="/category" className={`hover:text-primary `}>All Categories</Link></li>
-                <li><Link href="/productpage" className={`hover:text-primary`}>Pages</Link></li>
                 <li><Link href="/about" className={`hover:text-primary `}>About</Link></li>
+                <li><Link href="/contact" className={`hover:text-primary`}>Contact</Link></li>
               </ul>
             </nav>
           </div>
-        </div>      
-      
+        </div>
+
       </header>
     </>
   )

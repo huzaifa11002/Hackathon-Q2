@@ -2,6 +2,7 @@ import { client } from "@/sanity/lib/client"
 import ProductList from "../components/ProductList";
 import { ProductType } from "../lib/type"
 import InstaImage from "../components/InstaImage";
+import { Suspense } from "react";
 
 const query = `*[_type == "products"]{
     _id,
@@ -25,7 +26,9 @@ export default async function Products() {
             <div className="w-[1440px] mx-auto max-w-[90%] my-20">
                 <div className="flex flex-col gap-10">
                     <h2 className="text-lg lg:text-3xl font-semibold text-main">All Products</h2>
+                    <Suspense>
                     <ProductList productData={productData} />
+                    </Suspense>
                 </div>
             </div>
             <div className="w-full bg-sky py-10">
@@ -40,7 +43,9 @@ export default async function Products() {
 
                     <div className="flex justify-center flex-col gap-10 text-center">
                         <h2 className="text-lg sm:text-2xl lg:text-4xl xl:text-5xl font-bold text-main capitalize">follow products and discounts on instagram</h2>
+                        <Suspense>
                         {await InstaImage()}
+                        </Suspense>
                     </div>
                 </div>
             </div>

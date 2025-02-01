@@ -37,6 +37,7 @@ export interface ButtonType {
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   iconLeft?: React.ReactElement
   iconRight?: React.ReactElement
+  disabled?: boolean;
 }
 
 //Cart Type

@@ -6,6 +6,7 @@ import Trophy from "../../../public/trophy 1.png"
 import Warranty from "../../../public/Group (3).png"
 import Support from "../../../public/customer-support.png"
 import ContactForm from "../components/ContactForm";
+import { Suspense } from "react";
 
 export default function Contact() {
     return (
@@ -55,7 +56,9 @@ export default function Contact() {
                             </div>
 
                             <div className="w-full md:w-1/2">
+                                <Suspense>
                                 <ContactForm />
+                                </Suspense>
                             </div>
 
                         </div>
