@@ -8,7 +8,7 @@ import PaymentForm from "./paymentForm";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);
 
-const page = () => {
+const PaymentInitial = () => {
     const [clientSecret, setClientSecret] = useState<string | null>(null);
 
     useEffect(() => {
@@ -26,7 +26,7 @@ const page = () => {
     if (!clientSecret) {
         return <div className="flex justify-center items-center h-screen">
             <div className="loader"></div>
-            </div>;
+        </div>;
     }
 
     return (
@@ -38,4 +38,4 @@ const page = () => {
     );
 }
 
-export default page
+export default PaymentInitial;
