@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { UserInfoSchema, Inputs } from '../lib/type';
 import { client } from '@/sanity/lib/client';
 import { useSelector, useDispatch } from 'react-redux';
-import { clearCart  } from '../redux/cartslice';
+import { clearCart } from '../redux/cartslice';
 import { RootState } from '../redux/store';
 import { MdOutlineError } from "react-icons/md";
 import { toast, Bounce } from 'react-toastify';
@@ -19,7 +19,7 @@ const generateOrderId = () => {
 const UserInfo = () => {
     const cartItem = useSelector((state: RootState) => state.cart)
     const dispatch = useDispatch();
-    const totalPayment = cartItem.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)
+    const totalPayment = cartItem.items.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
 
         try {
@@ -42,12 +42,12 @@ const UserInfo = () => {
                 _type: 'order',
                 orderId: orderId,
                 userId: { _type: 'reference', _ref: userInfo._id },
-                cartItems: cartItem.map(item => ({ _type: 'reference', _ref: item._id })),
+                cartItems: cartItem.items.map(item => ({ _type: 'reference', _ref: item._id })),
                 totalAmount: totalPayment
             });
 
             dispatch(clearCart());
-            reset();
+            reset({});
 
         } catch (error) {
             console.error("Error creating documents:", error);

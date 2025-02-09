@@ -4,7 +4,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { add } from "../redux/cartslice";
 import { FiShoppingCart } from "react-icons/fi";
-import { Bounce, ToastContainer, toast } from 'react-toastify';
+import { Bounce, toast } from 'react-toastify';
 import 'react-toastify/ReactToastify.css';
 import Card from './Card';
 import { ProductType } from '../lib/type';

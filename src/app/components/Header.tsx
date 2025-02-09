@@ -3,12 +3,13 @@ import Link from "next/link"
 import Image from "next/image"
 import Logo from "../../../public/site-logo.png"
 import { HiBars3, HiBars3BottomLeft } from "react-icons/hi2";
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { FaCheck } from "react-icons/fa6";
 import { MdOutlineErrorOutline } from "react-icons/md";
 import { FiShoppingCart } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
+import SearchBar from "./SearchBar";
 
 
 const Header = () => {
@@ -30,6 +31,12 @@ const Header = () => {
   //Item Counter Script
 
   const item = useSelector((state: RootState) => state.cart)
+
+  const handleSearch = (query: string) => {
+    //Generate Slug
+    query = query.replace(/\s+/g, '-').toLowerCase();
+    window.location.href = `/search/${query}`;
+  };
 
   return (
     <>
@@ -82,12 +89,12 @@ const Header = () => {
           <div className="w-full border-b border-sky">
             <div className="w-[1440px] mx-auto max-w-[90%] h-[74px] flex justify-between items-center">
               <nav>
-                <ul className="flex justify-between gap-5 text-gray">
+                <ul className="flex justify-between items-center gap-5 text-gray">
                   <li><Link href="/" className={`hover:text-primary `}>Home</Link></li>
                   <li><Link href="/products" className={`hover:text-primary `}>Shop</Link></li>
-                  <li><Link href="/category" className={`hover:text-primary `}>All Categories</Link></li>
+                  <li><Link href="/category" className={`hover:text-primary `}>Categories</Link></li>
                   <li><Link href="/about" className={`hover:text-primary `}>About</Link></li>
-                  <li><Link href="/contact" className={`hover:text-primary`}>Contact</Link></li>
+                  <SearchBar onSearch={handleSearch} />
                 </ul>
               </nav>
               <div className="flex justify-between items-center gap-2">
@@ -153,9 +160,10 @@ const Header = () => {
               <ul className="flex flex-col gap-5 text-gray px-5">
                 <li><Link href="/" className={`hover:text-primary `}>Home</Link></li>
                 <li><Link href="/products" className={`hover:text-primary `}>Shop</Link></li>
-                <li><Link href="/category" className={`hover:text-primary `}>All Categories</Link></li>
+                <li><Link href="/category" className={`hover:text-primary `}>Categories</Link></li>
                 <li><Link href="/about" className={`hover:text-primary `}>About</Link></li>
                 <li><Link href="/contact" className={`hover:text-primary`}>Contact</Link></li>
+                <SearchBar onSearch={handleSearch} />
               </ul>
             </nav>
           </div>

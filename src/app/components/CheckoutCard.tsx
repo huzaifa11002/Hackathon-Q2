@@ -48,7 +48,7 @@ const CheckoutCard = () => {
             <div className='flex flex-col gap-3'>
                 <h3 className="font-base text-xl">Your Items</h3>
                 <ul className='flex flex-col gap-1'>
-                    {cartItem.map((item: CartType, index: number) => (
+                    {cartItem.items.map((item: CartType, index: number) => (
                         <li key={index} className='flex flex-row justify-between items-center'>
                             <span className="text-xs lg:text-sm xl:text-base">{item.title}</span>
                             <span className="text-xs lg:text-sm xl:text-base">x{item.quantity}</span>
@@ -71,12 +71,12 @@ const CheckoutCard = () => {
                 </div>
                 <div className='flex flex-row justify-between items-center'>
                     <h3 className="font-base text-xl">Total Amount</h3>
-                    <p className="font-base text-xl">${cartItem.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)}</p>
+                    <p className="font-base text-xl">${cartItem.items.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)}</p>
                 </div>
                 <button form='checkout+userInfo'
                     onClick={handleSubmit}
-                    disabled={paymentMethod == "" || cartItem.length == 0}
-                    className={`bg-primary text-white font-bold py-2 rounded mt-5 ${paymentMethod == "" || cartItem.length == 0? 'opacity-50 cursor-not-allowed' : 'opacity-100'}`}>
+                    disabled={paymentMethod == "" || cartItem.items.length == 0}
+                    className={`bg-primary text-white font-bold py-2 rounded mt-5 ${paymentMethod == "" || cartItem.items.length == 0? 'opacity-50 cursor-not-allowed' : 'opacity-100'}`}>
                     Checkout</button>
             </div>
         </div>
