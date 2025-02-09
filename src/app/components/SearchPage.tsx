@@ -33,7 +33,7 @@ const SearchPage: React.FC<SearchPageProps> = ({ query }) => {
     };
 
     fetchData();
-  }, [setQuery]);
+  }, [querySetter]);
 
   if (loading) {
     return <div>Loading...</div>;
