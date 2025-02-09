@@ -17,7 +17,7 @@ const generateOrderId = () => {
 
 const UserInfo = () => {
     const cartItem = useSelector((state: RootState) => state.cart)
-    const totalPayment = cartItem.items.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)
+    const totalPayment = cartItem.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
 
         try {
@@ -40,7 +40,7 @@ const UserInfo = () => {
                 _type: 'order',
                 orderId: orderId,
                 userId: { _type: 'reference', _ref: userInfo._id },
-                cartItems: cartItem.items.map(item => ({ _type: 'reference', _ref: item._id })),
+                cartItems: cartItem.map(item => ({ _type: 'reference', _ref: item._id })),
                 totalAmount: totalPayment
             });
 

@@ -25,12 +25,12 @@ export default function Cart() {
     const handleRemoveItem = (_id: string) => {
         dispatch(remove(_id))
     }
-    const totalValue = cartItem.items.reduce((total, item) => {
+    const totalValue = cartItem.reduce((total, item) => {
         return total + item.price * item.quantity;
     }, 0);
 
     const moveToCheckOut = () => {
-        if (cartItem.items.length > 0) {
+        if (cartItem.length > 0) {
             router.push('/checkout');
         }
         else {
@@ -47,7 +47,7 @@ export default function Cart() {
                         <div className="text-main ">
                             <h3 className="font-medium text-xl">Bag</h3>
                         </div>
-                        {cartItem.items.length === 0 ? (
+                        {cartItem.length === 0 ? (
                             <div className="flex flex-col gap-3 items-center justify-center">
                             <p className='text-xs lg:text-sm xl:text-base my-5'>Your Cart is Empty</p>
                             <Link href="/products">
@@ -55,7 +55,7 @@ export default function Cart() {
                             </Link>
                             </div>
                         ) : (
-                            cartItem.items.map((item: CartType, index) => (
+                            cartItem.map((item: CartType, index) => (
                                 <CartCard
                                     key={index}
                                     {...item}
@@ -86,7 +86,7 @@ export default function Cart() {
                                 <span className="font-bold text-xs lg:text-sm xl:text-base">{totalValue.toFixed(2)}</span>
                             </div>
                             <div className="flex justify-center">
-                                <Button disabled={cartItem.items.length === 0} value="member checkout" onClick={moveToCheckOut} />
+                                <Button disabled={cartItem.length === 0} value="member checkout" onClick={moveToCheckOut} />
                             </div>
 
                         </div>
