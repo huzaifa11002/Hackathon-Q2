@@ -79,7 +79,7 @@ const Header = () => {
                     <FiShoppingCart className="w-[16px] h-[16px]" />
                     <span>Cart</span>
                   </div>
-                  <span className="w-6 h-6 leading-6 text-center bg-primary rounded-full text-white text-sm">{item.length}</span>
+                  <span className="w-6 h-6 leading-6 text-center bg-primary rounded-full text-white text-sm">{item.items.length}</span>
                 </div>
               </Link>
             </div>
@@ -139,7 +139,7 @@ const Header = () => {
                 <Link href="/cart">
                   <div className="flex items-center bg-white rounded-lg px-3 py-1 relative">
                     <FiShoppingCart className="w-[20px] h-[20px] text-main " />
-                    <span className="w-5 h-5 leading-5 text-center bg-primary rounded-full text-white absolute -top-2 -right-1 text-xs">{item.length}</span>
+                    <span className="w-5 h-5 leading-5 text-center bg-primary rounded-full text-white absolute -top-2 -right-1 text-xs">{item.items.length}</span>
                   </div>
                 </Link>
                 <div>
