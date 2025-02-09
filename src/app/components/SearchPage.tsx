@@ -41,7 +41,7 @@ const SearchPage: React.FC<SearchPageProps> = ({ query }) => {
   return (
     <>
       <div className="flex flex-col gap-10">
-        <h2 className="text-lg lg:text-3xl font-semibold text-main">Search Results for "{setQuery}"</h2>
+        <h2 className="text-lg lg:text-3xl font-semibold text-main">Search Results for &quot;{setQuery}&quot;</h2>
         <ProductList productData={productData} />
       </div>
     </>
