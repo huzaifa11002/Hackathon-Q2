@@ -7,7 +7,7 @@ import { FiShoppingCart } from "react-icons/fi";
 import { Bounce, toast } from 'react-toastify';
 import 'react-toastify/ReactToastify.css';
 import Card from './Card';
-import { ProductType } from '../lib/type';
+import { ProductType } from '../types/type';
 
 interface ProductListProps {
     productData: ProductType[]

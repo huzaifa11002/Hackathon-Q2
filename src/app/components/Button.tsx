@@ -1,4 +1,4 @@
-import { ButtonType } from "../lib/type"
+import { ButtonType } from "../types/type"
 
 
 const Button = (props: ButtonType) => {

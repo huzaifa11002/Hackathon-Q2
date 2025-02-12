@@ -5,7 +5,7 @@ import { FiShoppingCart } from "react-icons/fi";
 import Button from './Button';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/ReactToastify.css';
-import { AddToCartButton } from '../lib/type';
+import { AddToCartButton } from '../types/type';
 
 const AddToCart = ({ product }: AddToCartButton) => {
   const dispatch = useDispatch();

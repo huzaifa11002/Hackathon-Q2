@@ -1,5 +1,5 @@
 "use client";
-import { ProductType } from '../lib/type'
+import { ProductType } from '../types/type'
 import { client } from '@/sanity/lib/client'
 import ProductList from '../components/ProductList'
 import { useEffect, useState } from 'react';

@@ -1,19 +1,33 @@
 "use client";
 
 import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast, Bounce } from 'react-toastify';
 import Button from "../components/Button";
+import { useRouter } from "next/navigation";
+import { client } from "@/sanity/lib/client";
+import { MdShoppingBasket } from "react-icons/md";
 
 
 export default function PaymentForm() {
     const stripe = useStripe();
     const elements = useElements();
-
+    const route = useRouter()
     const [isProcess, setIsProcess] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [totalAmount, setTotalAmount] = useState<number | null>(null);
+    useEffect(() => {
+        const fetchAmount = async () => {
+            const userId = localStorage.getItem('userId') // Assuming you have stored the userId in localStorage
+            if (userId) {
+                const query = `*[_type == "order" && userId._ref == ${userId}]{totalAmount}`
+                const result = await client.fetch(query)
+                setTotalAmount(result[0].totalAmount)
+            }
+        }
 
-
+        fetchAmount()
+    }, [])
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 
@@ -37,7 +51,7 @@ export default function PaymentForm() {
             setIsProcess(false);
             toast.success('Payment successful', {
                 position: "bottom-right",
-                autoClose: 5000,
+                autoClose: 3000,
                 hideProgressBar: false,
                 closeOnClick: false,
                 pauseOnHover: true,
@@ -46,13 +60,28 @@ export default function PaymentForm() {
                 theme: "dark",
                 transition: Bounce,
             });
+            setTimeout(() => {
+                toast.success('Order has been placed', {
+                    icon: <MdShoppingBasket className="w-[16px] h-[16px]" />,
+                    position: "bottom-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                    transition: Bounce,
+                });
+            }, 1000)
+            route.push("/order")
         }
     };
 
     return (
         <form onSubmit={handleSubmit} className="flex flex-col items-center gap-5">
             <PaymentElement />
-            <Button type="submit" disabled={!stripe || isProcess} value={isProcess ? "Processing..." : "Pay"}/>
+            <Button type="submit" disabled={!stripe || isProcess} value={isProcess ? "Processing..." : `"Pay $"${totalAmount}`} />
             {errorMessage && <div>{errorMessage}</div>
             }
         </form>

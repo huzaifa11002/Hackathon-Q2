@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import Link from "next/link"
 import { FiShoppingCart } from "react-icons/fi";
-import { CardProps } from '../lib/type';
+import { CardProps } from '../types/type';
 
 
 const Card = (props: CardProps) => {

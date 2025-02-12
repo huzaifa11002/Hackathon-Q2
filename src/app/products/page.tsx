@@ -1,6 +1,6 @@
 import { client } from "@/sanity/lib/client"
 import ProductList from "../components/ProductList";
-import { ProductType } from "../lib/type"
+import { ProductType } from "../types/type"
 import InstaImage from "../components/InstaImage";
 import { Suspense } from "react";
 

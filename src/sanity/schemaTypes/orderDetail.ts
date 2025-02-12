@@ -8,7 +8,7 @@ export const orderSchema = defineType({
     defineField({
       name: 'orderId',
       title: 'Order ID',
-      type: 'number',
+      type: 'string',
       validation: (Rule) => Rule.required().error('Order ID is required'),
     }),
     defineField({

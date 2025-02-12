@@ -1,6 +1,6 @@
 import { client } from "@/sanity/lib/client"
 import ProductList from "./ProductList"
-import { ProductType } from "../lib/type"
+import { ProductType } from "../types/type"
 
 
 const query = `*[_type == "products"]{

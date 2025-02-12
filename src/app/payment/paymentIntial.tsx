@@ -5,14 +5,15 @@ import { loadStripe } from "@stripe/stripe-js";
 import { createPaymentIntent } from "./payment-intent";
 import { Elements } from "@stripe/react-stripe-js";
 import PaymentForm from "./paymentForm";
+import Cookies from 'js-cookie';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);
 
 const PaymentInitial = () => {
     const [clientSecret, setClientSecret] = useState<string | null>(null);
-
+    const userId = Cookies.get("userId") as string;
     useEffect(() => {
-        createPaymentIntent()
+        createPaymentIntent(userId)
             .then((res) => {
                 if (res && res.clientSecret) {
                     setClientSecret(res.clientSecret)

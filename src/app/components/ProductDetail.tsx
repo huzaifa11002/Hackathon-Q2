@@ -4,7 +4,7 @@ import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import Count from "@/app/components/Count";
 import AddToCart from "@/app/components/AddToCart";
-import { ProductType } from '../lib/type';
+import { ProductType } from '../types/type';
 import { useRouter } from "next/router";
 
 interface ProductDetailsProps {

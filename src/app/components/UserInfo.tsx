@@ -1,7 +1,7 @@
 "use client";
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { UserInfoSchema, Inputs } from '../lib/type';
+import { UserInfoSchema, Inputs } from '../types/type';
 import { client } from '@/sanity/lib/client';
 import { useSelector} from 'react-redux';
 import { RootState } from '../redux/store';

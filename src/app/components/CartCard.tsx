@@ -2,7 +2,7 @@ import React from 'react'
 import Image from "next/image"
 import { IoMdHeartEmpty } from "react-icons/io";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { Cart } from '../lib/type';
+import { Cart } from '../types/type';
 
 const CartCard = (props: Cart) => {
     return (

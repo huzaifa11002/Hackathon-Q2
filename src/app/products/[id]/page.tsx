@@ -1,7 +1,7 @@
 import { client } from "@/sanity/lib/client"
 import FeatureProducts from "@/app/components/FeatureProducts";
 import ProductDetails from "@/app/components/ProductDetail";
-import { ProductType } from "@/app/lib/type";
+import { ProductType } from "@/app/types/type";
 import { Suspense } from "react";
 
 
