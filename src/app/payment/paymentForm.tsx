@@ -50,7 +50,7 @@ export default function PaymentForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="flex flex-col items-center gap-5">
             <PaymentElement />
             <Button type="submit" disabled={!stripe || isProcess} value={isProcess ? "Processing..." : "Pay"}/>
             {errorMessage && <div>{errorMessage}</div>

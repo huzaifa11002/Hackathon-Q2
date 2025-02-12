@@ -17,13 +17,33 @@ const ContactForm = () => {
                 subject: data.subject,
                 message: data.message,
             })
-
-            alert("Your Contact Form Submitted Successfully")
+            toast.success('Your Contact Form Submitted Successfully', {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Bounce,
+            });
             reset();
         }
         catch (error) {
             console.error("Error creating documents:", error);
-            alert("There was an error submitting your form. Please try again.");
+            toast.error('Fill the form correctly', {
+                icon: <MdOutlineError className="w-[16px] h-[16px]" />,
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Bounce,
+            });
         }
     };
     
