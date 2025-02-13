@@ -5,7 +5,6 @@ import Image from "next/image";
 import Count from "@/app/components/Count";
 import AddToCart from "@/app/components/AddToCart";
 import { ProductType } from '../types/type';
-import { useRouter } from "next/router";
 
 interface ProductDetailsProps {
   productData: ProductType;
@@ -14,12 +13,7 @@ interface ProductDetailsProps {
 
 const ProductDetails = ({ productData, error }: ProductDetailsProps) => {
   
-  const router = useRouter();
   const [quantity, setQuantity] = useState(1);
-
-  if (router.isFallback) {
-    return <div>Loading...</div>;
-  }
 
   if (error || !productData) {
     return (

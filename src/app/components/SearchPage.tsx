@@ -36,13 +36,17 @@ const SearchPage: React.FC<SearchPageProps> = ({ query }) => {
   }, [querySetter]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
   return (
     <>
       <div className="flex flex-col gap-10">
         <h2 className="text-lg lg:text-3xl font-semibold text-main">Search Results for &quot;{setQuery}&quot;</h2>
-        <ProductList productData={productData} />
+        {productData.length > 0 ? (
+          <ProductList productData={productData} />
+        ) : (
+          <p className="text-lg lg:text-3xl text-centere font-semibold text-main">Your searched was not found</p>
+        )}
       </div>
     </>
   )

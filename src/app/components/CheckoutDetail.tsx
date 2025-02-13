@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
 import { MdOutlineError } from "react-icons/md";
 import { toast, Bounce } from 'react-toastify';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from "next/navigation";
 import { MdShoppingBasket } from "react-icons/md";
 import { removeAll } from '../redux/cartslice';
@@ -62,12 +62,21 @@ const CheckoutDetail = () => {
                 _type: 'order',
                 orderId: orderId,
                 userId: { _type: 'reference', _ref: userInfo._id },
-                cartItems: cartItem.map(item => ({ _type: 'reference', _ref: item._id })),
+                cartItems: cartItem.map(item => ({ _type: 'reference', _ref: item._id, key: item._id })),
                 totalAmount: totalPayment
             });
 
             Cookies.set('orderId', orderId);
 
+            useEffect(() => {
+                // Check if user ID is saved in cookies
+                const userId = Cookies.get('userId');
+                if (userId) {
+                    console.log('User ID found in cookies:', userId);
+                } else {
+                    console.log('User ID not found in cookies.');
+                }
+            }, []);
             if (paymentMethod === 'online') {
                 toast.info('Your payment is initializing', {
                     icon: <MdShoppingBasket className="w-[16px] h-[16px]" />,
@@ -97,7 +106,7 @@ const CheckoutDetail = () => {
                 });
                 reset();
             dispatch(removeAll());
-                router.push('/order');
+                // router.push('/order');
             }
 
         } catch (error) {

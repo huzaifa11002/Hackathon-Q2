@@ -14,6 +14,13 @@ const SearchBar = (search: SearchBarProps) => {
         setQuery(event.target.value);
     };
 
+    const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            handleSearch();
+        }
+    };
+
     const handleSearch = () => {
         search.onSearch(query);
     }
@@ -21,11 +28,12 @@ const SearchBar = (search: SearchBarProps) => {
 
     return (
         <div>
-            <form className={`border border-gray-300 rounded-lg p-2 flex items-center justify-between sm:w-[90px] md:w-[175px] lg:w-full`} >
+            <form onSubmit={(e) => { e.preventDefault(); handleSearch(); }} className={`border border-gray-300 rounded-lg p-2 flex items-center justify-between sm:w-[90px] md:w-[175px] lg:w-full`} >
                 <input
                     type="text"
                     value={query}
                     onChange={handleInputChange}
+                    onKeyDown={handleKeyPress}
                     placeholder="Search products..."
                     className="placeholder:gray-300 w-full outline-none"
                 />
