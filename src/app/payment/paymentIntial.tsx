@@ -11,9 +11,9 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY 
 
 const PaymentInitial = () => {
     const [clientSecret, setClientSecret] = useState<string | null>(null);
-    const userId = Cookies.get("userId") as string;
+    const orderId = Cookies.get("orderId") as string;
     useEffect(() => {
-        createPaymentIntent(userId)
+        createPaymentIntent(orderId)
             .then((res) => {
                 if (res && res.clientSecret) {
                     setClientSecret(res.clientSecret)

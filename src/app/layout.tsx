@@ -5,6 +5,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Provider from "./redux/provider";
 import { Bounce, ToastContainer } from "react-toastify";
+import {ClerkProvider} from "@clerk/nextjs";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,27 +27,26 @@ export default function RootLayout({
           <Header />
           {children}
           <ToastContainer 
-    position="bottom-right"
-    autoClose={5000}
-    hideProgressBar={false}
-    newestOnTop={false}
-    closeOnClick={false}
-    rtl={false}
-    pauseOnFocusLoss
-    draggable
-    pauseOnHover
-    theme="dark"
-    transition={Bounce}
-    toastStyle={{
-      backgroundColor: '#fff', // Custom background color for all toasts
-      color: '#000', // Custom text color for all toasts
-  }}
-  className="custom-toast"
-    />
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+            transition={Bounce}
+            toastStyle={{
+              backgroundColor: '#fff', // Custom background color for all toasts
+              color: '#000', // Custom text color for all toasts
+            }}
+            className="custom-toast"
+          />
           <Footer />
         </Provider>
       </body>
-
     </html>
   );
 }

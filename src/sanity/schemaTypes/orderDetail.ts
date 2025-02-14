@@ -24,8 +24,20 @@ export const orderSchema = defineType({
       type: 'array',
       of: [
         {
-          type: 'reference',
-          to: [{ type: 'products' }],
+          type: 'object',
+          fields: [
+            {
+              name: 'product',
+              type: 'reference',
+              to: [{ type: 'products' }],
+              title: 'Product',
+            },
+            {
+              name: 'quantity',
+              type: 'number',
+              title: 'Quantity',
+            },
+          ],
         },
       ],
       validation: (Rule) => Rule.required().error('Cart items are required'),

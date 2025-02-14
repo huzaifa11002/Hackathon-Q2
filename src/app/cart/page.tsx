@@ -74,7 +74,7 @@ export default function Cart() {
                             <div className="flex flex-col gap-5 text-sm">
                                 <div className="flex justify-between items-center">
                                     <span className="text-xs lg:text-sm xl:text-base">Subtotal</span>
-                                    <span className="font-bold text-xs lg:text-sm xl:text-base">{totalValue.toFixed(2)}</span>
+                                    <span className="font-bold text-xs lg:text-sm xl:text-base">${totalValue.toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between items-center">
                                     <span className="text-xs lg:text-sm xl:text-base">Estimated Delivery & Handling</span>
@@ -83,7 +83,7 @@ export default function Cart() {
                             </div>
                             <div className="flex justify-between items-center">
                                 <span className="text-xs lg:text-sm xl:text-base">Total</span>
-                                <span className="font-bold text-xs lg:text-sm xl:text-base">{totalValue.toFixed(2)}</span>
+                                <span className="font-bold text-xs lg:text-sm xl:text-base">${totalValue.toFixed(2)}</span>
                             </div>
                             <div className="flex justify-center">
                                 <Button disabled={cartItem.length === 0} value="member checkout" onClick={moveToCheckOut} />

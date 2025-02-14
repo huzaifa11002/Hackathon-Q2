@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
 import { MdOutlineError } from "react-icons/md";
 import { toast, Bounce } from 'react-toastify';
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from "next/navigation";
 import { MdShoppingBasket } from "react-icons/md";
 import { removeAll } from '../redux/cartslice';
@@ -34,9 +34,15 @@ const CheckoutDetail = () => {
     const router = useRouter();
     const [paymentMethod, setPaymentMethod] = useState<string>('');
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
+    const { register, handleSubmit, formState: { errors }, trigger, reset } = useForm<Inputs>({
+        resolver: zodResolver(UserInfoSchema)
+    });
+
     const handlePaymentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setPaymentMethod(event.target.value);
     };
+
     const totalPayment = cartItem.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
 
@@ -62,21 +68,15 @@ const CheckoutDetail = () => {
                 _type: 'order',
                 orderId: orderId,
                 userId: { _type: 'reference', _ref: userInfo._id },
-                cartItems: cartItem.map(item => ({ _type: 'reference', _ref: item._id, key: item._id })),
+                cartItems: cartItem.map(item => ({
+                    product: { _type: 'reference', _ref: item._id },
+                    quantity: item.quantity
+                })),
                 totalAmount: totalPayment
             });
 
             Cookies.set('orderId', orderId);
 
-            useEffect(() => {
-                // Check if user ID is saved in cookies
-                const userId = Cookies.get('userId');
-                if (userId) {
-                    console.log('User ID found in cookies:', userId);
-                } else {
-                    console.log('User ID not found in cookies.');
-                }
-            }, []);
             if (paymentMethod === 'online') {
                 toast.info('Your payment is initializing', {
                     icon: <MdShoppingBasket className="w-[16px] h-[16px]" />,
@@ -105,8 +105,8 @@ const CheckoutDetail = () => {
                     transition: Bounce,
                 });
                 reset();
-            dispatch(removeAll());
-                // router.push('/order');
+                dispatch(removeAll());
+                router.push(`/order/${Cookies.get('orderId')}`);
             }
 
         } catch (error) {
@@ -128,9 +128,6 @@ const CheckoutDetail = () => {
         }
     }
 
-    const { register, handleSubmit, formState: { errors }, trigger, reset } = useForm<Inputs>({
-        resolver: zodResolver(UserInfoSchema)
-    });
 
     return (
         <div className='w-[1440px] mx-auto max-w-[90%] my-20'>

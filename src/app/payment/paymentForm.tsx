@@ -7,7 +7,7 @@ import Button from "../components/Button";
 import { useRouter } from "next/navigation";
 import { client } from "@/sanity/lib/client";
 import { MdShoppingBasket } from "react-icons/md";
-
+import Cookies from 'js-cookie';
 
 export default function PaymentForm() {
     const stripe = useStripe();
@@ -18,9 +18,9 @@ export default function PaymentForm() {
     const [totalAmount, setTotalAmount] = useState<number | null>(null);
     useEffect(() => {
         const fetchAmount = async () => {
-            const userId = localStorage.getItem('userId') // Assuming you have stored the userId in localStorage
-            if (userId) {
-                const query = `*[_type == "order" && userId._ref == ${userId}]{totalAmount}`
+            const orderId = Cookies.get('orderId') // Assuming you have stored the userId in localStorage
+            if (orderId) {
+                const query = `*[_type == "order" && orderId == "${orderId}"]{totalAmount}`
                 const result = await client.fetch(query)
                 setTotalAmount(result[0].totalAmount)
             }
@@ -74,14 +74,14 @@ export default function PaymentForm() {
                     transition: Bounce,
                 });
             }, 1000)
-            route.push("/order")
+            route.push(`/order/${Cookies.get('orderId')}`)
         }
     };
 
     return (
         <form onSubmit={handleSubmit} className="flex flex-col items-center gap-5">
             <PaymentElement />
-            <Button type="submit" disabled={!stripe || isProcess} value={isProcess ? "Processing..." : `"Pay $"${totalAmount}`} />
+            <Button type="submit" disabled={!stripe || isProcess} value={isProcess ? "Processing..." : `Pay $${totalAmount}`} />
             {errorMessage && <div>{errorMessage}</div>
             }
         </form>
