@@ -8,10 +8,13 @@ import { useRouter } from "next/navigation";
 import { client } from "@/sanity/lib/client";
 import { MdShoppingBasket } from "react-icons/md";
 import Cookies from 'js-cookie';
+import { removeAll } from "../redux/cartslice";
+import { useDispatch } from "react-redux";
 
 export default function PaymentForm() {
     const stripe = useStripe();
     const elements = useElements();
+    const dispatch = useDispatch();
     const route = useRouter()
     const [isProcess, setIsProcess] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -74,6 +77,7 @@ export default function PaymentForm() {
                     transition: Bounce,
                 });
             }, 1000)
+            dispatch(removeAll());
             route.push(`/order/${Cookies.get('orderId')}`)
         }
     };
