@@ -1,37 +1,62 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🛒 E-Commerce Store
 
-## Getting Started
+## 🚀 Overview
+This is a modern, fully functional e-commerce application built with Next.js, Tailwind CSS, TypeScript, and Sanity. It provides a seamless shopping experience with secure payments and user-friendly authentication.
 
-First, run the development server:
+## 🔥 Features
+- **Dynamic UI**: Built with Next.js for smooth navigation and React hooks for interactivity.
+- **Responsive Design**: Styled using Tailwind CSS for a sleek and adaptive interface.
+- **Strong Type Safety**: TypeScript ensures robust and error-free code.
+- **CMS Integration**: Sanity is used to manage products, categories, users, cart items, and order details.
+- **Secure Payments**: Stripe integration for handling online transactions.
+- **State Management**: Redux Toolkit stores cart items in localStorage for persistent shopping sessions.
+- **Validation & Authentication**: Zod ensures secure form validation.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🏷️ Tech Stack
+- **Frontend**: Next.js, React Hooks, Tailwind CSS
+- **Backend & Database**: Sanity (Headless CMS)
+- **Authentication & Validation**: Zod
+- **State Management**: Redux Toolkit
+- **Payments**: Stripe
+- **Deployment**: Vercel
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛋️ Installation & Setup
+1. **Clone the repository**  
+   ```bash
+   git clone <repository-url>
+   cd ecommerce-project
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. **Install dependencies**  
+   ```bash
+   npm install
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. **Set up environment variables**  
+   Create a `.env.local` file and add the required API keys:
+   ```env
+   NEXT_PUBLIC_SANITY_PROJECT_ID=your_sanity_project_id
+   NEXT_PUBLIC_SANITY_DATASET=your_sanity_dataset
+   STRIPE_SECRET_KEY=your_stripe_secret_key
+   ```
 
-## Learn More
+4. **Run the development server**  
+   ```bash
+   npm run dev
+   ```
+   The application will be available at `http://localhost:3000`.
 
-To learn more about Next.js, take a look at the following resources:
+## 🛒 How It Works
+1. **Browse Products**: Explore different product categories.
+2. **Add to Cart**: Items can be added to the cart and saved via Redux Toolkit.
+3. **Checkout & Payment**: Secure payment processing with Stripe.
+4. **Order Management**: Orders are stored and managed in Sanity.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🌍 Live Demo
+Try the live version here:  
+🔗 [E-Commerce Store](https://hackathon-q2-seven-beta.vercel.app/)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## 📝 License
+This project is licensed under the [MIT License](LICENSE).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-"# Hackathon-Q2" 
